@@ -1,6 +1,6 @@
 // lib/splash_screen.dart
 import 'package:flutter/material.dart';
-import 'package:registration_app/register_page.dart';
+import 'package:register/auth/register.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
