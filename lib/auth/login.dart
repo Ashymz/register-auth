@@ -119,24 +119,35 @@ class _LoginPageState extends State<LoginPage> {
                     : null,
                 onSaved: (value) => registrationNumber = value!,
               ),
-              // Add a widget/button for fingerprint authentication
+             
               SizedBox(height: 20),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      authenticate();
-                    },
-                    child: Icon(
-                      Icons.fingerprint,
-                      color: Colors.blue,
+              Center(
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        authenticate();
+                      },
+                      child: Icon(
+                        Icons.fingerprint,
+                        color: Colors.blue,
+                        size: 30,
+                      ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: _login,
-                    child: Text('Login'),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: _login,
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

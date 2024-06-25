@@ -1,4 +1,4 @@
-package com.example.flutter_bank
+package com.example.register
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
