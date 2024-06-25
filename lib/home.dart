@@ -1,4 +1,5 @@
 // lib/home_page.dart
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,7 +9,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late String name, registrationNumber, gender, dateOfBirth;
+  String name = '';
+  String registrationNumber = '';
+  String gender = '';
+  String dateOfBirth = '';
+  String passportPhotoPath = '';
+  File? _passportPhoto;
 
   @override
   void initState() {
@@ -19,10 +25,14 @@ class _HomePageState extends State<HomePage> {
   _loadDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      name = prefs.getString('name')!;
-      registrationNumber = prefs.getString('registrationNumber')!;
-      gender = prefs.getString('gender')!;
-      dateOfBirth = prefs.getString('dateOfBirth')!;
+      name = prefs.getString('name') ?? '';
+      registrationNumber = prefs.getString('registrationNumber') ?? '';
+      gender = prefs.getString('gender') ?? '';
+      dateOfBirth = prefs.getString('dateOfBirth') ?? '';
+      passportPhotoPath = prefs.getString('passportPhoto') ?? '';
+      if (passportPhotoPath.isNotEmpty) {
+        _passportPhoto = File(passportPhotoPath);
+      }
     });
   }
 
@@ -41,7 +51,10 @@ class _HomePageState extends State<HomePage> {
             Text('Registration Number: $registrationNumber'),
             Text('Gender: $gender'),
             Text('Date of Birth: $dateOfBirth'),
-            // Display passport photo if necessary
+            SizedBox(height: 20),
+            _passportPhoto == null
+                ? Text('No passport photo available.')
+                : Image.file(_passportPhoto!, height: 200),
           ],
         ),
       ),
