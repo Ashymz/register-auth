@@ -45,23 +45,19 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (authenticated) {
-        if (_formKey.currentState!.validate()) {
-          _formKey.currentState!.save();
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          String? savedName = prefs.getString('name');
-          String? savedRegNum = prefs.getString('registrationNumber');
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? savedName = prefs.getString('name');
+        String? savedRegNum = prefs.getString('registrationNumber');
 
-          if (name == savedName && registrationNumber == savedRegNum) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          } else {
-            // Show error message
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Invalid credentials')),
-            );
-          }
+        if (savedName != null && savedRegNum != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('No saved credentials found')),
+          );
         }
       } else {
         print('Authentication failed');
@@ -119,7 +115,6 @@ class _LoginPageState extends State<LoginPage> {
                     : null,
                 onSaved: (value) => registrationNumber = value!,
               ),
-             
               SizedBox(height: 20),
               Center(
                 child: Row(
