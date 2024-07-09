@@ -109,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 onSaved: (value) => name = value!,
               ),
               TextFormField(
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: 'Registration Number'),
                 validator: (value) => value!.isEmpty
                     ? 'Please enter your registration number'

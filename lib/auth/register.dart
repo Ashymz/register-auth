@@ -284,80 +284,84 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: Text('Register'),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Please enter your name' : null,
-                onSaved: (value) => name = value!,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Registration Number'),
-                validator: (value) => value!.isEmpty
-                    ? 'Please enter your registration number'
-                    : null,
-                onSaved: (value) => registrationNumber = value!,
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Gender'),
-                value: gender,
-                items: <String>['Male', 'Female']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    gender = value!;
-                  });
-                },
-                validator: (value) =>
-                    value == null ? 'Please select your gender' : null,
-                onSaved: (value) => gender = value!,
-              ),
-              TextFormField(
-                readOnly: true,
-                decoration: InputDecoration(
-                  labelText: 'Date of Birth',
-                  hintText: dateOfBirth,
+      body: PopScope(
+        canPop: false,
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Name'),
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please enter your name' : null,
+                  onSaved: (value) => name = value!,
                 ),
-                onTap: () => _selectDate(context),
-                validator: (value) => dateOfBirth.isEmpty
-                    ? 'Please enter your date of birth'
-                    : null,
-                onSaved: (value) => dateOfBirth = value!,
-              ),
-              SizedBox(height: 20),
-              _passportPhoto == null
-                  ? Text('No image selected.')
-                  : Image.file(_passportPhoto!, height: 200),
-              ElevatedButton(
-                onPressed: _pickImage,
-                child: Text('Select Passport Photo'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _saveDetails,
-                child: Text('Register'),
-              ),
-              Center(
-                  child: Text('OR',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20))),
-              ElevatedButton(
-                onPressed: authenticate,
-                child: Text('Register with Fingerprint'),
-              ),
-            ],
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Registration Number'),
+                  validator: (value) => value!.isEmpty
+                      ? 'Please enter your registration number'
+                      : null,
+                  onSaved: (value) => registrationNumber = value!,
+                ),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(labelText: 'Gender'),
+                  value: gender,
+                  items: <String>['Male', 'Female']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value!;
+                    });
+                  },
+                  validator: (value) =>
+                      value == null ? 'Please select your gender' : null,
+                  onSaved: (value) => gender = value!,
+                ),
+                TextFormField(
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: 'Date of Birth',
+                    hintText: dateOfBirth,
+                  ),
+                  onTap: () => _selectDate(context),
+                  validator: (value) => dateOfBirth.isEmpty
+                      ? 'Please enter your date of birth'
+                      : null,
+                  onSaved: (value) => dateOfBirth = value!,
+                ),
+                SizedBox(height: 20),
+                _passportPhoto == null
+                    ? Text('No image selected.')
+                    : Image.file(_passportPhoto!, height: 200),
+                ElevatedButton(
+                  onPressed: _pickImage,
+                  child: Text('Select Passport Photo'),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _saveDetails,
+                  child: Text('Register'),
+                ),
+                Center(
+                    child: Text('OR',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20))),
+                ElevatedButton(
+                  onPressed: authenticate,
+                  child: Text('Register with Fingerprint'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
