@@ -69,7 +69,7 @@ class _EnrollmentPageState extends State<EnrollmentPage> {
 
       if (authenticated) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Verification Succesfull')),
+          const SnackBar(content: Text('Verification Succesfull!')),
         );
         Navigator.pushReplacement(
           context,
