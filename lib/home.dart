@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:register/auth/register.dart';
+import 'package:register/course_registration.dart';
 import 'package:register/quiz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,24 +77,43 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Name: $name',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                  Text('Registration Number: $registrationNumber',
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                  Text('Gender: $gender',
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                  Text('Date of Birth: $dateOfBirth',
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                  SizedBox(height: 20),
-                  _passportPhoto == null
-                      ? Text('No passport photo available.')
-                      : Image.file(_passportPhoto!, height: 200),
-                ],
-              ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Name: $name',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    Text('Registration Number: $registrationNumber',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    Text('Gender: $gender',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    Text('Date of Birth: $dateOfBirth',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    SizedBox(height: 20),
+                    _passportPhoto == null
+                        ? Text('No passport photo available!.')
+                        : Image.file(_passportPhoto!, height: 200),
+                    SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.green),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EnrollmentPage()),
+                          );
+                        },
+                        child: Text(
+                          'Enroll Now',
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ]),
             ),
           ),
         ),
